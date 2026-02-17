@@ -1,6 +1,7 @@
 export default async function handler(req, res) {
-  const { uid, region } = req.query;
+  res.setHeader("Access-Control-Allow-Origin", "*"); // CORS পারমিট
 
+  const { uid, region } = req.query;
   if (!uid || !region) {
     return res.status(400).json({ error: "UID and region required" });
   }
