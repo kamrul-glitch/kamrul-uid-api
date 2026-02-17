@@ -1,16 +1,17 @@
 export default async function handler(req, res) {
-  
-  res.setHeader("Access-Control-Allow-Origin", "*"); // CORS পারমিট
+  // 🔹 CORS fix
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
-  const { uid, region } = req.query;
-  if (!uid || !region) {
-    return res.status(400).json({ error: "UID and region required" });
+  const { uid } = req.query; // region নেওয়া হবে না, সব BD
+
+  if (!uid) {
+    return res.status(400).json({ error: "UID required" });
   }
 
   try {
-    // এখানে তুমি fetch URL পরিবর্তন করে নিজের API / OB52 API দিতে পারো
-const response = await fetch(`https://kamrul-uid-api.vercel.app/api/account/?uid=${uid}&region=${region}`);
-const data = await response.json();
+    // 🔹 OB52 API থেকে BD region fix করে fetch
+    const response = await fetch(`https://info-ob52.vercel.app/api/account/?uid=${uid}&region=BD`);
+    const data = await response.json();
 
     res.status(200).json({
       nickname: data.AccountInfo?.AccountName || "Not found"
