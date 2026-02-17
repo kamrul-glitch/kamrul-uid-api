@@ -1,6 +1,7 @@
 export default async function handler(req, res) {
-  // 🔹 CORS fix
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*"); // এটা দিতে হবে
+  ...
+}
 
   const { uid } = req.query; // region নেওয়া হবে না, সব BD
 
