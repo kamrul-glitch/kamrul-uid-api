@@ -9,8 +9,8 @@ export default async function handler(req, res) {
 
   try {
     // এখানে তুমি fetch URL পরিবর্তন করে নিজের API / OB52 API দিতে পারো
-    const response = await fetch(`https://info-ob52.vercel.app/api/account/?uid=${uid}&region=${region}`);
-    const data = await response.json();
+const response = await fetch(`https://kamrul-uid-api.vercel.app/api/account/?uid=${uid}&region=${region}`);
+const data = await response.json();
 
     res.status(200).json({
       nickname: data.AccountInfo?.AccountName || "Not found"
