@@ -1,16 +1,15 @@
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // এটা দিতে হবে
-  ...
-}
+  // 🔹 CORS fix
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
-  const { uid } = req.query; // region নেওয়া হবে না, সব BD
+  const { uid } = req.query; // BD-only, region fixed
 
   if (!uid) {
     return res.status(400).json({ error: "UID required" });
   }
 
   try {
-    // 🔹 OB52 API থেকে BD region fix করে fetch
+    // 🔹 OB52 API থেকে BD region fixed
     const response = await fetch(`https://info-ob52.vercel.app/api/account/?uid=${uid}&region=BD`);
     const data = await response.json();
 
